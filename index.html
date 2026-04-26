@@ -7,191 +7,1429 @@
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #FAF7F2; --dark: #1C1A17; --forest: #2D5016; --moss: #5A7A35;
-    --lavender: #7B6FA8; --sky: #4A8BB5; --warm: #C4723A; --blush: #C45A6E;
-    --gold: #D4A74A; --light-border: rgba(28,26,23,0.12);
+    --cream: #FAF7F2;
+    --dark: #1C1A17;
+    --forest: #2D5016;
+    --moss: #5A7A35;
+    --lavender: #7B6FA8;
+    --sky: #4A8BB5;
+    --warm: #C4723A;
+    --blush: #C45A6E;
+    --gold: #D4A74A;
+    --light-border: rgba(28,26,23,0.12);
+    --card-bg: #FFFFFF;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Sarabun', sans-serif; background: var(--cream); color: var(--dark); line-height: 1.7; font-size: 15px; }
-  
-  .header {
-    background: var(--forest) linear-gradient(rgba(45,80,22,0.7), rgba(45,80,22,0.8)), url('https://images.unsplash.com/photo-1576611666063-5278df8ac99c?q=80&w=2000&auto=format&fit=crop');
-    background-size: cover; background-position: center; color: white; padding: 5rem 2rem; text-align: center;
+  body {
+    font-family: 'Sarabun', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    line-height: 1.7;
+    font-size: 15px;
   }
-  .header h1 { font-size: 3rem; margin-bottom: 0.5rem; }
-  
-  .nav { background: white; border-bottom: 1px solid var(--light-border); padding: 1rem; display: flex; gap: 10px; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
-  .nav a { text-decoration: none; color: var(--dark); font-size: 13px; padding: 5px 15px; border-radius: 20px; border: 1px solid var(--light-border); white-space: nowrap; }
-  .nav a:hover { background: var(--forest); color: white; }
+  /* Header */
+  .header {
+    background: var(--forest);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 40px,
+      rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 80px
+    );
+  }
+  .header-kana {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+  }
+  .header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.4rem;
+  }
+  .header-sub {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+  }
+  .header-badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 13px;
+  }
 
-  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
-  .section-title { font-size: 1.2rem; font-weight: 700; color: var(--forest); border-left: 5px solid var(--forest); padding-left: 15px; margin: 2rem 0 1rem; }
+  /* Navigation */
+  .nav {
+    background: white;
+    border-bottom: 1px solid var(--light-border);
+    padding: 0.75rem 2rem;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav a {
+    text-decoration: none;
+    color: var(--dark);
+    font-size: 13px;
+    padding: 5px 12px;
+    border-radius: 16px;
+    white-space: nowrap;
+    border: 1px solid var(--light-border);
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: var(--forest); color: white; border-color: var(--forest); }
 
-  .day-card { background: white; border-radius: 15px; border: 1px solid var(--light-border); margin-bottom: 3rem; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-  .day-header { background: #fdfdfd; padding: 1.5rem; border-bottom: 1px solid var(--light-border); display: flex; align-items: center; gap: 15px; }
-  .day-num { background: var(--forest); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; flex-shrink: 0; }
-  
-  .activity { display: flex; padding: 1.5rem; border-bottom: 1px solid var(--light-border); gap: 20px; }
+  /* Main layout */
+  .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  /* Sections */
+  .section-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--moss);
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    background: white;
+    padding: 1rem 1.25rem;
+    border-radius: 10px;
+    border: 1px solid var(--light-border);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #555;
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Day cards */
+  .day-group { margin-bottom: 2.5rem; }
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+  .day-num {
+    background: var(--forest);
+    color: white;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .day-info h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark);
+  }
+  .day-info .day-sub {
+    font-size: 12px;
+    color: #888;
+  }
+  .day-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--light-border);
+    overflow: hidden;
+  }
+  .activity {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    border-bottom: 1px solid var(--light-border);
+  }
   .activity:last-child { border-bottom: none; }
-  .activity-info { flex: 1; }
-  .activity-title { font-weight: 700; font-size: 17px; color: var(--sky); margin-bottom: 5px; }
-  .activity-desc { font-size: 14px; color: #555; }
-  .activity-img { width: 150px; height: 100px; object-fit: cover; border-radius: 10px; flex-shrink: 0; }
+  .activity-time {
+    background: #F8F6F2;
+    padding: 14px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    border-right: 1px solid var(--light-border);
+    min-height: 70px;
+  }
+  .act-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .activity-content {
+    padding: 12px 16px;
+  }
+  .activity-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+  .activity-title a {
+    color: var(--sky);
+    text-decoration: none;
+  }
+  .activity-title a:hover { text-decoration: underline; }
+  .activity-desc {
+    font-size: 12.5px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 5px;
+  }
+  .activity-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+  .tag-park { background: #E8F4E8; color: #2D6A2D; }
+  .tag-food { background: #FFF0E5; color: #A0541A; }
+  .tag-hotel { background: #EEE8FF; color: #5A3FA0; }
+  .tag-kids { background: #FFE8F0; color: #A03060; }
+  .tag-beer { background: #FFF5DC; color: #8B6000; }
+  .tag-drive { background: #E8F0FF; color: #2040A0; }
+  .tag-note { background: #F0F0F0; color: #555; }
 
-  .stay-info { background: #F4F0FF; padding: 1.2rem; margin: 0 1.5rem 1.5rem; border-radius: 10px; border: 1px solid #D0C8F0; font-size: 14px; }
-  .tag { display: inline-block; padding: 2px 8px; border-radius: 5px; font-size: 11px; font-weight: 700; margin-top: 8px; text-transform: uppercase; }
-  .tag-drive { background: #e3f2fd; color: #1976d2; }
-  .tag-food { background: #fff3e0; color: #f57c00; }
+  /* Parking note */
+  .parking-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 12px;
+    color: #8B6000;
+    background: #FFF9E0;
+    border: 1px solid #F0E080;
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-top: 5px;
+  }
+  .parking-note::before { content: '🅿️'; font-size: 11px; flex-shrink: 0; }
+
+  /* Stay card */
+  .stay-card {
+    background: #F4F0FF;
+    border: 1px solid #D0C8F0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin: 1rem 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .stay-icon { font-size: 24px; flex-shrink: 0; }
+  .stay-info h3 { font-size: 14px; font-weight: 600; color: var(--lavender); margin-bottom: 3px; }
+  .stay-info p { font-size: 12.5px; color: #666; }
+  .stay-info a { color: var(--sky); text-decoration: none; font-size: 12px; }
+
+  /* Tabelog box */
+  .tabelog-box {
+    background: #FFF8F0;
+    border: 1px solid #F0D0A0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 1rem 0;
+  }
+  .tabelog-box h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--warm);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tabelog-box h3::before { content: '⭐'; font-size: 13px; }
+  .tabelog-item {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    font-size: 13px;
+  }
+  .tabelog-item:last-child { border-bottom: none; }
+  .tabelog-item a { color: var(--sky); text-decoration: none; }
+  .tabelog-item a:hover { text-decoration: underline; }
+  .tabelog-score {
+    font-size: 11px;
+    background: var(--warm);
+    color: white;
+    padding: 1px 6px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  /* Landmark section */
+  .landmark-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+  .landmark-card {
+    background: white;
+    border: 1px solid var(--light-border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    border-left: 4px solid var(--moss);
+  }
+  .landmark-card.kids { border-left-color: var(--blush); }
+  .landmark-card.food { border-left-color: var(--warm); }
+  .landmark-card.beer { border-left-color: var(--gold); }
+  .landmark-name {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .landmark-name a { color: var(--dark); text-decoration: none; }
+  .landmark-name a:hover { color: var(--sky); }
+  .landmark-area {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 4px;
+  }
+  .landmark-desc {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  /* Summary table */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+    margin-bottom: 2rem;
+  }
+  .summary-card {
+    background: white;
+    border: 1px solid var(--light-border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .summary-card .s-num {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--forest);
+    display: block;
+  }
+  .summary-card .s-label {
+    font-size: 12px;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  /* Tips */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+  .tip-card {
+    background: white;
+    border: 1px solid var(--light-border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .tip-title {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: var(--forest);
+  }
+  .tip-desc {
+    font-size: 12.5px;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: var(--light-border);
+    margin: 2rem 0;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px;
+    color: #aaa;
+    border-top: 1px solid var(--light-border);
+  }
 
   @media (max-width: 600px) {
-    .activity { flex-direction: column; }
-    .activity-img { width: 100%; height: 180px; }
+    .header h1 { font-size: 1.8rem; }
+    .activity { grid-template-columns: 70px 1fr; }
+    .day-header { gap: 8px; }
   }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>Hokkaido Summer Trip</h1>
-  <p>5 - 18 กรกฎาคม 2026 | แพลนเที่ยวครอบครัว</p>
+  <div class="header-kana">北海道 · 夏の旅行 · 家族旅行</div>
+  <h1>ฮอกไกโด 14 วัน</h1>
+  <div class="header-sub">5 – 18 กรกฎาคม 2026 · เดินทางโดยรถเช่า · ครอบครัว + เด็กหญิง 8 ขวบ</div>
+  <div class="header-badges">
+    <span class="badge">🛬 New Chitose Airport</span>
+    <span class="badge">🌸 ลาเวนเดอร์กำลังบาน</span>
+    <span class="badge">🍒 เก็บเชอรี่ได้พอดี</span>
+    <span class="badge">🚗 เช่ารถ 13 คืน</span>
+  </div>
 </div>
 
-<div class="nav">
-  <a href="#day1">Day 1-3</a>
-  <a href="#day4">Day 4-6</a>
-  <a href="#day7">Day 7-9</a>
-  <a href="#day10">Day 10-14</a>
-</div>
+<nav class="nav">
+  <a href="#overview">ภาพรวม</a>
+  <a href="#landmarks">Landmark</a>
+  <a href="#day1">วันที่ 1-2</a>
+  <a href="#day3">วันที่ 3-4</a>
+  <a href="#day5">วันที่ 5-6</a>
+  <a href="#day7">วันที่ 7-8</a>
+  <a href="#day9">วันที่ 9-10</a>
+  <a href="#day11">วันที่ 11-12</a>
+  <a href="#day13">วันที่ 13-14</a>
+  <a href="#stay">ที่พัก</a>
+  <a href="#food">อาหาร Tabelog</a>
+  <a href="#tips">เคล็ดลับ</a>
+</nav>
 
 <div class="container">
 
-  <div class="section-title" id="day1">ช่วงที่ 1: Sapporo & Otaru</div>
-  
-  <div class="day-card">
-    <div class="day-header"><div class="day-num">1</div> <div><strong>5 ก.ค.</strong> - ถึงซัปโปโร</div></div>
-    <div class="activity">
-      <div class="activity-info">
-        <div class="activity-title">Shiroi Koibito Park</div>
-        <div class="activity-desc">โรงงานช็อกโกแลตชื่อดัง เดินเล่นในสวนเทพนิยาย และทำ Workshop คุกกี้</div>
-      </div>
-      <img src="https://images.unsplash.com/photo-1621213501257-236b2cb9cd21?auto=format&fit=crop&w=300" class="activity-img">
+  <!-- OVERVIEW -->
+  <div id="overview">
+    <div class="section-title">ภาพรวมการเดินทาง</div>
+    <div class="summary-grid">
+      <div class="summary-card"><span class="s-num">14</span><div class="s-label">วันเดินทาง</div></div>
+      <div class="summary-card"><span class="s-num">6</span><div class="s-label">เขตพื้นที่</div></div>
+      <div class="summary-card"><span class="s-num">30+</span><div class="s-label">สถานที่</div></div>
+      <div class="summary-card"><span class="s-num">3</span><div class="s-label">เรียวกัง / โรงแรม</div></div>
     </div>
-    <div class="stay-info">🏨 พัก: <strong>Onsen Ryokan Yuen Sapporo</strong> (คืนที่ 1/2)</div>
-  </div>
-
-  <div class="day-card">
-    <div class="day-header"><div class="day-num">2</div> <div><strong>6 ก.ค.</strong> - ตลาดปลา & เบียร์</div></div>
-    <div class="activity">
-      <div class="activity-info">
-        <div class="activity-title">Nijo Market & Sapporo Beer Museum</div>
-        <div class="activity-desc">ทานข้าวหน้าปลาสดๆ ตอนเช้า ต่อด้วยพิพิธภัณฑ์เบียร์ประวัติศาสตร์</div>
-      </div>
-      <img src="https://images.unsplash.com/photo-1550920422-777ec813eb98?auto=format&fit=crop&w=300" class="activity-img">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#2D5016"></div>ธรรมชาติ / สวน</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#C4723A"></div>อาหาร / ตลาด</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#C45A6E"></div>เหมาะเด็ก</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#D4A74A"></div>โรงเบียร์</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#7B6FA8"></div>ที่พัก</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#4A8BB5"></div>Landmark / วิว</div>
     </div>
   </div>
 
-  <div class="day-card">
-    <div class="day-header"><div class="day-num">3</div> <div><strong>7 ก.ค.</strong> - เมืองโรแมนติก Otaru</div></div>
-    <div class="activity">
-      <div class="activity-info">
-        <div class="activity-title">Otaru Canal & Music Box Museum</div>
-        <div class="activity-desc">ล่องเรือชมคลองโอตารุ และชมพิพิธภัณฑ์กล่องดนตรีชื่อดัง</div>
+  <div class="divider"></div>
+
+  <!-- LANDMARKS -->
+  <div id="landmarks">
+    <div class="section-title">Landmark แนะนำ แยกตามประเภท</div>
+
+    <p style="font-size:13px;color:#666;margin-bottom:1rem;">🏔️ <strong>ธรรมชาติ / วิวสวย</strong></p>
+    <div class="landmark-grid">
+      <div class="landmark-card">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Blue+Pond+Biei+Hokkaido" target="_blank">Blue Pond (青い池)</a></div>
+        <div class="landmark-area">บีเอ — ห่างจาก Furano 30 นาที</div>
+        <div class="landmark-desc">สระน้ำสีฟ้าเทอร์ควอยซ์ลึกลับ วอลเปเปอร์ Mac ชื่อดัง มีที่จอดรถข้างถนน เดิน 2 นาทีถึง</div>
+        <div class="parking-note">มีที่จอดรถฟรีข้างถนน (Route 966) จำนวนจำกัดในช่วง peak season</div>
       </div>
-      <img src="https://images.unsplash.com/photo-1580210085818-cb54ab5ffcb7?auto=format&fit=crop&w=300" class="activity-img">
-    </div>
-    <div class="stay-info">🏨 พัก: <strong>OMO5 Otaru by Hoshino Resorts</strong></div>
-  </div>
-
-  <div class="section-title" id="day4">ช่วงที่ 2: Shakotan & Biei</div>
-  
-  <div class="day-card">
-    <div class="day-header"><div class="day-num">4</div> <div><strong>8 ก.ค.</strong> - คาบสมุทร Shakotan</div></div>
-    <div class="activity">
-      <div class="activity-info">
-        <div class="activity-title">Cape Kamui</div>
-        <div class="activity-desc">เดินสันเขาชมน้ำทะเลสีฟ้า "Shakotan Blue" และทานอูนิสดๆ ตามฤดูกาล</div>
+      <div class="landmark-card">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Shikisai+no+Oka+Biei" target="_blank">Shikisai no Oka</a></div>
+        <div class="landmark-area">บีเอ — ทุ่งดอกไม้ panorama</div>
+        <div class="landmark-desc">ทุ่งดอกไม้หลายสีปลูกเป็นแถบบนเนินเขา เด็กชอบนั่งรถ Tractor Bus ชมวิว</div>
+        <div class="parking-note">ที่จอดรถในพื้นที่ฟรี ขนาดใหญ่รับรถได้มาก</div>
       </div>
-      <img src="https://images.unsplash.com/photo-1505692795793-20f5457ad03f?auto=format&fit=crop&w=300" class="activity-img">
-    </div>
-  </div>
-
-  <div class="day-card">
-    <div class="day-header"><div class="day-num">5</div> <div><strong>9 ก.ค.</strong> - สวนสัตว์ Asahiyama</div></div>
-    <div class="activity">
-      <div class="activity-info">
-        <div class="activity-title">Asahiyama Zoo</div>
-        <div class="activity-desc">สวนสัตว์ที่โด่งดังที่สุด ชมเพนกวินและหมีขั้วโลกอย่างใกล้ชิด</div>
+      <div class="landmark-card">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Farm+Tomita+Furano" target="_blank">Farm Tomita</a></div>
+        <div class="landmark-area">ฟุราโนะ — ลาเวนเดอร์ดัง</div>
+        <div class="landmark-desc">ทุ่งลาเวนเดอร์ที่ดังที่สุดของฮอกไกโด บานสุดปลาย ก.ค. มีร้านไอศกรีมลาเวนเดอร์ เข้าฟรี</div>
+        <div class="parking-note">ที่จอดรถฟรีขนาดใหญ่ มักเต็มช่วงบ่ายวันหยุด แนะนำมาเช้า</div>
       </div>
-      <img src="https://images.unsplash.com/photo-1517036662453-6ce683793e23?auto=format&fit=crop&w=300" class="activity-img">
-    </div>
-    <div class="stay-info">🏨 พัก: <strong>La Vista Furano Hills</strong> (คืนที่ 1/3)</div>
-  </div>
-
-  <div class="day-card">
-    <div class="day-header"><div class="day-num">6</div> <div><strong>10 ก.ค.</strong> - ทุ่งดอกไม้ Biei</div></div>
-    <div class="activity">
-      <div class="activity-info">
-        <div class="activity-title">Blue Pond & Shikisai-no-Oka</div>
-        <div class="activity-desc">ชมสระน้ำสีฟ้า และเนินเขาทุ่งดอกไม้ 7 สี (มีรถลากให้นั่งรอบสวน)</div>
+      <div class="landmark-card">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Mount+Hakodate+Ropeway" target="_blank">ภูเขาฮาโกดาเตะ</a></div>
+        <div class="landmark-area">ฮาโกดาเตะ — วิวกลางคืน</div>
+        <div class="landmark-desc">วิวกลางคืนที่ขึ้นชื่อ "3 อันดับดีที่สุดในโลก" ขึ้นกระเช้าไฟฟ้าหรือขับรถขึ้นไปได้</div>
+        <div class="parking-note">ที่จอดรถที่ฐาน (จ่ายเงิน) และด้านบนสำหรับขับรถขึ้น — แนะนำโกรเช้า 3 นาที</div>
       </div>
-      <img src="https://images.unsplash.com/photo-1596414086775-3e28400f0a51?auto=format&fit=crop&w=300" class="activity-img">
-    </div>
-  </div>
-
-  <div class="section-title" id="day7">ช่วงที่ 3: Furano & Hakodate</div>
-
-  <div class="day-card">
-    <div class="day-header"><div class="day-num">7</div> <div><strong>11 ก.ค.</strong> - Lavender Day</div></div>
-    <div class="activity">
-      <div class="activity-info">
-        <div class="activity-title">Farm Tomita</div>
-        <div class="activity-desc">ชมทุ่งลาเวนเดอร์ที่ดีที่สุดในโลก และลองไอศกรีมรสลาเวนเดอร์</div>
-      </div>
-      <img src="https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?auto=format&fit=crop&w=300" class="activity-img">
-    </div>
-  </div>
-
-  <div class="day-card">
-    <div class="day-header"><div class="day-num">10</div> <div><strong>14 ก.ค.</strong> - มุ่งหน้า Hakodate</div></div>
-    <div class="activity">
-      <div class="activity-info">
-        <div class="activity-title">Hakodate Ropeway</div>
-        <div class="activity-desc">ชมวิวกลางคืนที่สวยติดอันดับ 1 ใน 3 ของโลก</div>
-      </div>
-      <img src="https://images.unsplash.com/photo-1542931287-023b922fa89b?auto=format&fit=crop&w=300" class="activity-img">
-    </div>
-    <div class="stay-info">🏨 พัก: <strong>La Vista Hakodate Bay</strong> (คืนที่ 1/2)</div>
-  </div>
-
-  <div class="section-title" id="day10">ช่วงสุดท้าย: เก็บตก & กลับบ้าน</div>
-
-  <div class="day-card">
-    <div class="day-header"><div class="day-num">12</div> <div><strong>16 ก.ค.</strong> - Lake Toya</div></div>
-    <div class="activity">
-      <div class="activity-info">
-        <div class="activity-title">Lake Toya Cruise</div>
-        <div class="activity-desc">ล่องเรือกลางทะเลสาบภูเขาไฟ และชมพลุตอนกลางคืน (ถ้ามีเทศกาล)</div>
-      </div>
-      <img src="https://images.unsplash.com/photo-1545562085-8372ed58959c?auto=format&fit=crop&w=300" class="activity-img">
-    </div>
-  </div>
-
-  <div class="day-card">
-    <div class="day-header"><div class="day-num">14</div> <div><strong>18 ก.ค.</strong> - ช้อปปิ้ง & กลับไทย</div></div>
-    <div class="activity">
-      <div class="activity-info">
-        <div class="activity-title">Chitose Outlet Mall Rera</div>
-        <div class="activity-desc">เก็บตกของฝากก่อนเดินทางกลับสนามบินนิวชิโตเสะ</div>
-        <span class="tag tag-drive">🚗 คืนรถที่สนามบิน</span>
+      <div class="landmark-card">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Otaru+Canal+Hokkaido" target="_blank">คลองโอตารุ</a></div>
+        <div class="landmark-area">โอตารุ — ไฮไลต์เมือง</div>
+        <div class="landmark-desc">คลองประวัติศาสตร์ริมโกดังอิฐแดง สวยทั้งกลางวันและกลางคืน</div>
+        <div class="parking-note">จอดรถที่ Otaru Port Parking หรือ City Hall Parking ใกล้คลอง ~300 เยน/ชม.</div>
       </div>
     </div>
+
+    <p style="font-size:13px;color:#666;margin-bottom:1rem;">🎡 <strong>เหมาะกับเด็ก</strong></p>
+    <div class="landmark-grid">
+      <div class="landmark-card kids">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Shiroi+Koibito+Park+Sapporo" target="_blank">Shiroi Koibito Park</a></div>
+        <div class="landmark-area">ซัปโปโร — โรงงานช็อกโกแลต</div>
+        <div class="landmark-desc">โรงงาน + สวนสนุกช็อกโกแลต ทำ cookie ตกแต่งได้เอง เด็กชอบมาก เปิด 10.00-18.00</div>
+        <div class="parking-note">มีที่จอดรถในพื้นที่ เสียค่าจอดรถ ~200 เยน/30 นาที</div>
+      </div>
+      <div class="landmark-card kids">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Jozankei+Farm+Fruit+Picking+Sapporo" target="_blank">Jozankei Farm — เก็บเชอรี่</a></div>
+        <div class="landmark-area">ซัปโปโร ใต้ — ฟาร์มผลไม้</div>
+        <div class="landmark-desc">เก็บเชอรี่กินได้ไม่อั้น (ต้น ก.ค. คือช่วงดีที่สุด) มีบ่อตกปลาด้วย เหมาะครอบครัว</div>
+        <div class="parking-note">มีที่จอดรถฟรีในฟาร์ม</div>
+      </div>
+      <div class="landmark-card kids">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Otaru+Music+Box+Museum" target="_blank">พิพิธภัณฑ์กล่องดนตรีโอตารุ</a></div>
+        <div class="landmark-area">โอตารุ — ถนน Sakaimachi</div>
+        <div class="landmark-desc">กล่องดนตรีนับพันแบบในอาคารไม้เก่าสวยงาม เด็กชอบเสียงดนตรีและบรรยากาศ</div>
+        <div class="parking-note">จอดที่ parking Otaru ใกล้สถานี แล้วเดินมา ~15 นาที</div>
+      </div>
+      <div class="landmark-card kids">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Hakodate+Morning+Market" target="_blank">ตลาดเช้าฮาโกดาเตะ</a></div>
+        <div class="landmark-area">ฮาโกดาเตะ — ข้างสถานีรถไฟ</div>
+        <div class="landmark-desc">ตลาดอาหารทะเลสดๆ เด็กตกปลาหมึกสด (มีบริการ) กินปูและซีฟู้ด เปิด 6.00-14.00</div>
+        <div class="parking-note">ที่จอดรถข้างตลาด (จ่ายเงิน) หรือจอดที่โรงแรมแล้วเดินมา</div>
+      </div>
+    </div>
+
+    <p style="font-size:13px;color:#666;margin-bottom:1rem;">🍺 <strong>โรงเบียร์</strong></p>
+    <div class="landmark-grid">
+      <div class="landmark-card beer">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Sapporo+Beer+Museum+Hokkaido" target="_blank">Sapporo Beer Museum</a></div>
+        <div class="landmark-area">ซัปโปโร — Higashi Ward</div>
+        <div class="landmark-desc">พิพิธภัณฑ์เบียร์เดียวในญี่ปุ่น ชมฟรี หรือจ่าย ~1,000 เยนทำ premium tour พร้อมชิมเบียร์</div>
+        <div class="parking-note">มีที่จอดรถในพื้นที่ Sapporo Beer Garden (มีส่วนลด)</div>
+      </div>
+      <div class="landmark-card beer">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Otaru+Beer+Warehouse+No1" target="_blank">Otaru Beer Warehouse No.1</a></div>
+        <div class="landmark-area">โอตารุ — ริมคลอง</div>
+        <div class="landmark-desc">โรงเบียร์สไตล์เยอรมัน ทัวร์ฟรีทุก 30 นาที (11.10-17.40) ริมคลองโอตารุ</div>
+        <div class="parking-note">จอดที่ Port Parking ใกล้คลอง เดิน 2 นาทีถึง</div>
+      </div>
+    </div>
+
+    <p style="font-size:13px;color:#666;margin-bottom:1rem;">🏯 <strong>วัฒนธรรม / ประวัติศาสตร์</strong></p>
+    <div class="landmark-grid">
+      <div class="landmark-card">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Goryokaku+Tower+Hakodate" target="_blank">Goryokaku Tower & Park</a></div>
+        <div class="landmark-area">ฮาโกดาเตะ</div>
+        <div class="landmark-desc">ป้อมปราการรูปดาว 5 แฉก ชมจากหอคอย 107 เมตร มีนิทรรศการประวัติศาสตร์ด้วย</div>
+        <div class="parking-note">ที่จอดรถแนะนำ: Goryokaku Municipal Parking ด้านตะวันตก (จ่ายเงิน)</div>
+      </div>
+      <div class="landmark-card">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Kanemori+Red+Brick+Warehouse+Hakodate" target="_blank">Kanemori Red Brick Warehouse</a></div>
+        <div class="landmark-area">ฮาโกดาเตะ — ริมท่าเรือ</div>
+        <div class="landmark-desc">โกดังอิฐแดงปี 1909 ริมอ่าว ช้อปปิ้งและร้านอาหาร วิวสวยมากตอนพระอาทิตย์ตก</div>
+        <div class="parking-note">ที่จอดรถ Kanemori Parking ในบริเวณ (จ่ายเงิน)</div>
+      </div>
+      <div class="landmark-card">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Hachimanzaka+Slope+Hakodate" target="_blank">Hachimanzaka Slope</a></div>
+        <div class="landmark-area">ฮาโกดาเตะ</div>
+        <div class="landmark-desc">ทางลาดชันประวัติศาสตร์ มองเห็นอ่าวฮาโกดาเตะ ฉากถ่ายโฆษณา ถ่ายรูปสวยมาก</div>
+        <div class="parking-note">จอดใกล้ Motomachi area แล้วเดินชม</div>
+      </div>
+      <div class="landmark-card">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Sapporo+TV+Tower+Odori+Park" target="_blank">Sapporo TV Tower + Odori Park</a></div>
+        <div class="landmark-area">ซัปโปโร — ใจกลางเมือง</div>
+        <div class="landmark-desc">หอคอย 147 เมตร วิวเมืองซัปโปโร สวน Odori ยาว 1.5 กม. มีรถเข็น grilled corn ขาย</div>
+        <div class="parking-note">จอดที่ Odori Underground Parking หรือ Sapporo Station Parking</div>
+      </div>
+    </div>
   </div>
 
-  <footer style="text-align:center; color:#888; padding:2rem;">
-    <p>© 2026 Hokkaido Trip Plan - ขอให้มีความสุขกับการเดินทางครับ!</p>
-  </footer>
+  <div class="divider"></div>
+
+  <!-- DAY BY DAY -->
+  <div class="section-title">แผนการเดินทางวันต่อวัน</div>
+
+  <!-- DAY 1-2: ARRIVE + SAPPORO -->
+  <div id="day1" class="day-group">
+    <div class="day-header">
+      <div class="day-num">1</div>
+      <div class="day-info">
+        <h2>5 ก.ค. — เดินทางถึง New Chitose · ซัปโปโร</h2>
+        <div class="day-sub">BKK → New Chitose (CTS) · ขับรถ 40 นาทีถึงซัปโปโร</div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F0FF;color:#2040A0">✈️</div>
+          ถึง CTS
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">ลงเครื่องที่ New Chitose Airport</div>
+          <div class="activity-desc">รับกระเป๋า — ไปเคาน์เตอร์เช่ารถ (แนะนำ Toyota Rent a Car หรือ Times Car) — ออกเดินทางสู่ซัปโปโร ~40 นาที ทาง Route 36</div>
+          <div class="activity-tags"><span class="tag tag-drive">🚗 ขับรถ 40 นาที</span></div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFE8F0;color:#A03060">🍫</div>
+          14:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Shiroi+Koibito+Park+Sapporo" target="_blank">Shiroi Koibito Park</a> — โรงงานช็อกโกแลต</div>
+          <div class="activity-desc">ทัวร์โรงงานช็อกโกแลต "Shiroi Koibito" อันดับ 1 ของฮอกไกโด ทำ cookie ตกแต่งได้เอง (จอง workshop ล่วงหน้า!) ค่าเข้า 800 เยน/ผู้ใหญ่ 400 เยน/เด็ก</div>
+          <div class="activity-tags">
+            <span class="tag tag-kids">❤️ เด็กชอบมาก</span>
+            <span class="tag tag-park">🍫 โรงงานช็อก</span>
+          </div>
+          <div class="parking-note">ที่จอดรถในพื้นที่ ~200 เยน/30 นาที</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F0FF;color:#2040A0">🗼</div>
+          17:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Sapporo+TV+Tower+Odori+Park" target="_blank">Sapporo TV Tower & Odori Park</a></div>
+          <div class="activity-desc">เดินเล่นสวน Odori ยาว 1.5 กม. ชมหอคอย TV Tower (ค่าขึ้น 1,000 เยน) กิน grilled corn และ butter potato จาก food cart — วิวเมืองยามเย็นสวย</div>
+          <div class="activity-tags"><span class="tag tag-park">🌳 สวนสาธารณะ</span></div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF0E5;color:#A0541A">🦀</div>
+          19:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">ดินเนอร์ที่ Susukino — อาหารทะเล / ปูฮอกไกโด</div>
+          <div class="activity-desc">ย่าน Susukino มีร้านปูหลายร้าน แนะนำ "Kani Honke" หรือซิ่งหาร้านซีฟู้ดในย่านนี้ตามงบ</div>
+          <div class="activity-tags"><span class="tag tag-food">🦀 ซีฟู้ด</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stay-card">
+      <div class="stay-icon">🏨</div>
+      <div class="stay-info">
+        <h3>ที่พัก 2 คืน: Onsen Ryokan Yuen Sapporo</h3>
+        <p>เรียวกังสไตล์โมเดิร์น ใกล้ Sapporo Station · มีออนเซ็น · ใกล้ Odori Park<br>
+        <a href="https://maps.google.com/?q=Onsen+Ryokan+Yuen+Sapporo" target="_blank">📍 ดูบนแผนที่</a> | อยู่ Chuo Ward ซัปโปโร</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2: SAPPORO -->
+  <div class="day-group">
+    <div class="day-header">
+      <div class="day-num">2</div>
+      <div class="day-info">
+        <h2>6 ก.ค. — ซัปโปโร: เบียร์ + เก็บเชอรี่</h2>
+        <div class="day-sub">วันเที่ยวเต็มวันในซัปโปโร</div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF5DC;color:#8B6000">🍺</div>
+          10:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Sapporo+Beer+Museum+Hokkaido" target="_blank">Sapporo Beer Museum</a></div>
+          <div class="activity-desc">พิพิธภัณฑ์เบียร์แห่งเดียวในญี่ปุ่น (เข้าฟรี) หรือทำ Premium Tour 1,000 เยน/คน ชมประวัติ 150 ปีของ Sapporo Beer ชิมเบียร์สด Kaitakushi Beer ท้ายทัวร์ เด็กสามารถดื่ม non-alcoholic ได้ <strong>จอง Premium Tour ล่วงหน้าออนไลน์!</strong></div>
+          <div class="activity-tags">
+            <span class="tag tag-beer">🍺 โรงเบียร์</span>
+            <span class="tag tag-note">เปิด 11.00-18.00</span>
+          </div>
+          <div class="parking-note">ที่จอดรถใน Sapporo Beer Garden (มีส่วนลดสำหรับผู้มาชม)</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F4E8;color:#2D6A2D">🍒</div>
+          13:30
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Jozankei+Farm+Fruit+Picking+Sapporo" target="_blank">Jozankei Farm — เก็บเชอรี่</a></div>
+          <div class="activity-desc">ฟาร์มผลไม้ขนาดใหญ่ที่สุดในญี่ปุ่น ต้น ก.ค. = ช่วง peak เชอรี่! กินได้ไม่อั้น 1,700 เยน/ผู้ใหญ่ มีบ่อตกปลาและทำ pizza ด้วย ห่างจากซัปโปโร ~1 ชั่วโมง</div>
+          <div class="activity-tags">
+            <span class="tag tag-kids">❤️ เด็กชอบ</span>
+            <span class="tag tag-park">🍒 เก็บผลไม้</span>
+            <span class="tag tag-drive">🚗 60 นาที</span>
+          </div>
+          <div class="parking-note">ที่จอดรถฟรีในฟาร์ม ขนาดใหญ่เพียงพอ</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF0E5;color:#A0541A">🍜</div>
+          19:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">ดินเนอร์ — Soup Curry ซัปโปโร</div>
+          <div class="activity-desc">Soup Curry เป็นอาหารขึ้นชื่อของซัปโปโรโดยเฉพาะ แนะนำ "Garaku" หรือ "Suage+" ที่มีหลายสาขา</div>
+          <div class="activity-tags"><span class="tag tag-food">🍛 Local food</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3-4: OTARU -->
+  <div id="day3" class="day-group">
+    <div class="day-header">
+      <div class="day-num" style="background:var(--sky)">3</div>
+      <div class="day-info">
+        <h2>7 ก.ค. — โอตารุ (Otaru)</h2>
+        <div class="day-sub">ซัปโปโร → โอตารุ ~40 นาที · ค้างคืน 1 คืน</div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF0E5;color:#A0541A">🍱</div>
+          08:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Sankaku+Market+Otaru" target="_blank">Sankaku Market โอตารุ — อาหารเช้า</a></div>
+          <div class="activity-desc">ตลาดสามเหลี่ยม ข้าง Otaru Station มีข้าวหน้าซีฟู้ดสด uni ปู กุ้งโบตัน เปิดตั้งแต่ 8 โมงเช้า เหมาะมื้อเช้า</div>
+          <div class="activity-tags"><span class="tag tag-food">🦐 ซีฟู้ดสด</span></div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F0FF;color:#2040A0">🏙️</div>
+          10:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Otaru+Canal+Hokkaido" target="_blank">เดินเล่นคลองโอตารุ & ถนน Sakaimachi</a></div>
+          <div class="activity-desc">คลองสวย โกดังอิฐแดง ร้านของฝาก แวะ Music Box Museum (เด็กชอบ) และ Kitaichi Glass ร้านแก้วชื่อดัง</div>
+          <div class="activity-tags">
+            <span class="tag tag-kids">❤️ เด็กชอบ</span>
+            <span class="tag tag-park">🏛️ ประวัติศาสตร์</span>
+          </div>
+          <div class="parking-note">จอดที่ Otaru Port Parking ริมคลอง ~300 เยน/ชม. หรือ City Hall Parking</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF5DC;color:#8B6000">🍺</div>
+          14:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Otaru+Beer+Warehouse+No1" target="_blank">Otaru Beer Warehouse No.1</a></div>
+          <div class="activity-desc">โรงเบียร์สไตล์เยอรมัน ทัวร์ฟรีทุก 30 นาที (11.10-17.40) ไม่ต้องจอง ชิมเบียร์สด Dunkel, Pilsner, Weizen หรือทานอาหารกลางวัน</div>
+          <div class="activity-tags">
+            <span class="tag tag-beer">🍺 Craft Beer</span>
+            <span class="tag tag-note">ทัวร์ฟรี</span>
+          </div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF0E5;color:#A0541A">🍣</div>
+          18:30
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">ดินเนอร์ — ซูชิโอตารุ</div>
+          <div class="activity-desc">โอตารุขึ้นชื่อเรื่องซูชิ แนะนำ "Masazushi" (ร้านเก่า 75 ปี) หรือ "Otaru no Nigiri" ริมคลอง</div>
+          <div class="activity-tags"><span class="tag tag-food">🍣 ซูชิท้องถิ่น</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-header" style="margin-top:1.5rem">
+      <div class="day-num" style="background:var(--sky)">4</div>
+      <div class="day-info">
+        <h2>8 ก.ค. — Kaisen-don มื้อสุดท้ายโอตารุ → ฟุราโนะ</h2>
+        <div class="day-sub">โอตารุ → ฟุราโนะ ~2.5 ชั่วโมง</div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF0E5;color:#A0541A">🍚</div>
+          07:30
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Takinami+Donburi+Otaru" target="_blank">Kita no Donburiya Takinami Shokudo</a></div>
+          <div class="activity-desc">ร้านข้าวหน้าซีฟู้ดในตลาด Sankaku ดูแลโดยเจ้าของร้านปลาโดยตรง ของสด "Wagamama Don" เลือก topping ได้ 3-4 อย่าง ฝืนความคิว! มาแต่เช้าหน่อย เปิด 7.00</div>
+          <div class="activity-tags">
+            <span class="tag tag-food">⭐ Tabelog แนะนำ</span>
+          </div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F0FF;color:#2040A0">🚗</div>
+          09:30
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">ขับรถสู่ฟุราโนะ ผ่าน Asahikawa</div>
+          <div class="activity-desc">ระยะทาง ~160 กม. ใช้เวลา 2.5-3 ชั่วโมง แวะพักที่ SA ถ้าต้องการ ทางสวยผ่านภูเขาฮอกไกโด</div>
+          <div class="activity-tags"><span class="tag tag-drive">🚗 2.5 ชั่วโมง</span></div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F4E8;color:#2D6A2D">🌸</div>
+          13:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Farm+Tomita+Furano" target="_blank">Farm Tomita — ทุ่งลาเวนเดอร์</a></div>
+          <div class="activity-desc">ช่วงต้น-กลาง ก.ค. = ลาเวนเดอร์บานสุด! ถ่ายรูปสวยมาก ลองไอศกรีมลาเวนเดอร์ของฝาก เข้าฟรี เดินได้เยอะ แนะนำมาเช้าก่อนรถทัวร์มา</div>
+          <div class="activity-tags">
+            <span class="tag tag-park">💜 ลาเวนเดอร์</span>
+            <span class="tag tag-note">เข้าฟรี</span>
+          </div>
+          <div class="parking-note">ที่จอดรถฟรีขนาดใหญ่ แต่เต็มเร็วช่วงบ่าย</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF0E5;color:#A0541A">🧀</div>
+          16:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Furano+Cheese+Factory" target="_blank">Furano Cheese Factory</a></div>
+          <div class="activity-desc">ชมการผลิตชีส + ลองทำ butter/ice cream ด้วยตัวเอง (ต้องจองล่วงหน้า) มีร้าน pizza ข้างๆ</div>
+          <div class="activity-tags"><span class="tag tag-kids">❤️ เด็กชอบทำไอศกรีม</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stay-card">
+      <div class="stay-icon">🏯</div>
+      <div class="stay-info">
+        <h3>ที่พัก 3 คืน: La Vista Furano Hills</h3>
+        <p>โรงแรมสไตล์รีสอร์ต 3 นาทีจากสถานีฟุราโนะ · มีออนเซ็นส่วนตัว · วิวภูเขา · รวมอาหารเช้าซีฟู้ด · บริการรถรับ-ส่ง<br>
+        <a href="https://maps.google.com/?q=La+Vista+Furano+Hills" target="_blank">📍 ดูบนแผนที่</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5-6: FURANO + BIEI -->
+  <div id="day5" class="day-group">
+    <div class="day-header">
+      <div class="day-num" style="background:var(--lavender)">5</div>
+      <div class="day-info">
+        <h2>9 ก.ค. — บีเอ (Biei): ทุ่งดอกไม้ + Blue Pond</h2>
+        <div class="day-sub">ฟุราโนะ ↔ บีเอ ~30-40 นาที Day trip</div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F4E8;color:#2D6A2D">🌈</div>
+          08:30
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Shikisai+no+Oka+Biei" target="_blank">Shikisai no Oka — ทุ่งดอกไม้</a></div>
+          <div class="activity-desc">มาเช้าก่อนรถทัวร์! ทุ่งดอกไม้สีสันสดใสบนเนิน นั่ง Tractor Bus ชมวิว (เด็กชอบ) ถ่ายรูปสวย เปิด 9.10</div>
+          <div class="activity-tags">
+            <span class="tag tag-park">🌸 ทุ่งดอกไม้</span>
+            <span class="tag tag-kids">❤️ รถไถ</span>
+          </div>
+          <div class="parking-note">ที่จอดรถฟรีขนาดใหญ่ในพื้นที่</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F0FF;color:#2040A0">🔵</div>
+          11:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Blue+Pond+Biei+Hokkaido" target="_blank">Blue Pond (青い池)</a></div>
+          <div class="activity-desc">สระน้ำสีฟ้าเทอร์ควอยซ์ลึกลับ เดิน 2-5 นาทีจากที่จอดรถ สวยที่สุดตอนเช้าแสงไม่แรง ลองกินไอศกรีม "Blue Ice Cream" ข้างๆ</div>
+          <div class="activity-tags"><span class="tag tag-park">💙 Iconic spot</span></div>
+          <div class="parking-note">ที่จอดรถข้างถนน Route 966 ฟรี แต่เต็มไวในช่วง peak</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F4E8;color:#2D6A2D">🚜</div>
+          13:30
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">ขับ Patchwork Road — เส้นทาง panorama</div>
+          <div class="activity-desc">เส้นทางชมวิวทุ่งนาและฟาร์มสไตล์ฮอกไกโด แวะ "Ken and Mary's Tree" และ "Seven Stars Tree" จุดถ่ายรูป iconic</div>
+          <div class="activity-tags"><span class="tag tag-drive">🚗 Scenic Drive</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-header" style="margin-top:1.5rem">
+      <div class="day-num" style="background:var(--lavender)">6</div>
+      <div class="day-info">
+        <h2>10 ก.ค. — ฟุราโนะ: ไวน์ + Ningle Terrace</h2>
+        <div class="day-sub">วันเต็มในฟุราโนะ</div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F4E8;color:#2D6A2D">🍇</div>
+          10:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Furano+Winery+Hokkaido" target="_blank">Furano Winery</a></div>
+          <div class="activity-desc">ไวน์เนอรี่บนเนินที่มีทุ่งลาเวนเดอร์เล็กๆ ชิมไวน์ท้องถิ่น เดินชมสวนองุ่น วิวภูเขาสวย</div>
+          <div class="activity-tags"><span class="tag tag-beer">🍷 ไวน์ท้องถิ่น</span></div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFE8F0;color:#A03060">🧚</div>
+          14:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Ningle+Terrace+Furano" target="_blank">Ningle Terrace</a></div>
+          <div class="activity-desc">หมู่บ้านเล็กๆ ในป่า มีร้านงานฝีมือน่ารัก บรรยากาศเหมือนนิทาน เด็กชอบมาก เปิดช่วงบ่าย-เย็น</div>
+          <div class="activity-tags"><span class="tag tag-kids">❤️ เหมือนเทพนิยาย</span></div>
+          <div class="parking-note">จอดรถที่ Prince Hotel Furano แล้วเดินมา</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F4E8;color:#2D6A2D">🥛</div>
+          16:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Biei+Senka+Hills+Milk+Shop" target="_blank">Biei Senka Hills — นมฮอกไกโด</a></div>
+          <div class="activity-desc">แวะซื้อนม ชีส โยเกิร์ต และไอศกรีมนมสดสูตรพิเศษของบีเอ วิวภูเขาสวยในช่วงเย็น</div>
+          <div class="activity-tags"><span class="tag tag-food">🥛 ผลิตภัณฑ์นม</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 7-8: HAKODATE -->
+  <div id="day7" class="day-group">
+    <div class="day-header">
+      <div class="day-num" style="background:var(--blush)">7</div>
+      <div class="day-info">
+        <h2>11 ก.ค. — เดินทางสู่ฮาโกดาเตะ (Hakodate)</h2>
+        <div class="day-sub">ฟุราโนะ → ฮาโกดาเตะ ~3.5-4 ชั่วโมง</div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F0FF;color:#2040A0">🚗</div>
+          08:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">ขับรถสู่ฮาโกดาเตะ</div>
+          <div class="activity-desc">ระยะทาง ~280 กม. ผ่านทางหลวง Hokkaido Expressway แวะ SA ประมาณ 2 ครั้ง</div>
+          <div class="activity-tags"><span class="tag tag-drive">🚗 3.5-4 ชั่วโมง</span></div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F4E8;color:#2D6A2D">🏯</div>
+          13:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Goryokaku+Tower+Hakodate" target="_blank">Goryokaku Tower & Park</a></div>
+          <div class="activity-desc">ป้อมปราการรูปดาว 5 แฉก ชมจากหอคอย 107 เมตร (ค่าขึ้น 1,200 เยน/ผู้ใหญ่ 600 เยน/เด็ก) แล้วเดินลงมาเดิน in park</div>
+          <div class="activity-tags"><span class="tag tag-park">🏯 ประวัติศาสตร์</span></div>
+          <div class="parking-note">Goryokaku Municipal Parking ด้านตะวันตก (จ่ายเงิน) หรือ จอดริมถนน</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F0FF;color:#2040A0">⛵</div>
+          16:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Kanemori+Red+Brick+Warehouse+Hakodate" target="_blank">Kanemori Red Brick Warehouse & ริมอ่าว</a></div>
+          <div class="activity-desc">โกดังอิฐแดง ช้อปปิ้ง ชิมของว่าง ถ่ายรูป วิวอ่าวฮาโกดาเตะสวยมาก โดยเฉพาะช่วงพระอาทิตย์ตก</div>
+          <div class="activity-tags"><span class="tag tag-park">🏙️ Landmark</span></div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F0FF;color:#2040A0">🌃</div>
+          20:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Mount+Hakodate+Ropeway" target="_blank">ขึ้นกระเช้าภูเขาฮาโกดาเตะ — วิวกลางคืน</a></div>
+          <div class="activity-desc">วิวกลางคืน "3 อันดับดีสุดในโลก" ขึ้นกระเช้า 1,800 เยน/คน (ไป-กลับ) สวยงามมาก แนะนำขึ้นหลัง 20.00 เพื่อชมไฟเมือง</div>
+          <div class="activity-tags"><span class="tag tag-park">⭐ ต้องไป</span></div>
+          <div class="parking-note">มีที่จอดรถที่ฐาน (จ่ายเงิน) หรือขับรถขึ้นไปด้านบนได้โดยตรง</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-header" style="margin-top:1.5rem">
+      <div class="day-num" style="background:var(--blush)">8</div>
+      <div class="day-info">
+        <h2>12 ก.ค. — ฮาโกดาเตะ: ตลาดเช้า + Motomachi</h2>
+        <div class="day-sub">วันเต็มในฮาโกดาเตะ</div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF0E5;color:#A0541A">🦀</div>
+          06:30
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Hakodate+Morning+Market" target="_blank">Hakodate Morning Market — อาหารเช้า</a></div>
+          <div class="activity-desc">ตลาดเช้าที่ดังที่สุดของฮาโกดาเตะ ข้าวหน้าซีฟู้ด uni สด ปู กุ้งยักษ์ เปิด 6.00 เด็กตกปลาหมึกสด (มีบริการ) ต้องมาก่อน 8 โมงเพื่อหลีกเลี่ยงคิว</div>
+          <div class="activity-tags">
+            <span class="tag tag-food">🦀 ซีฟู้ดสด</span>
+            <span class="tag tag-kids">❤️ ตกปลาหมึก</span>
+          </div>
+          <div class="parking-note">จอดที่โรงแรม (La Vista) ใกล้ตลาด เดินได้ ~10 นาที</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F0FF;color:#2040A0">🏘️</div>
+          10:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Hachimanzaka+Slope+Hakodate" target="_blank">Motomachi & Hachimanzaka Slope</a></div>
+          <div class="activity-desc">ย่านประวัติศาสตร์บ้านสไตล์ยุโรป ทางลาด Hachimanzaka มองเห็นอ่าว ถ่ายรูปสวยมาก แวะ Old Public Hall of Hakodate Ward</div>
+          <div class="activity-tags"><span class="tag tag-park">📸 จุดถ่ายรูป</span></div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF0E5;color:#A0541A">🍣</div>
+          12:30
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">มื้อกลางวัน — ซีฟู้ดฮาโกดาเตะ</div>
+          <div class="activity-desc">"Hakodate Dining Miyabiya" 2 นาทีจากสถานี ข้างตลาดเช้า · หรือ "Uomasa Goryokaku" ห้องส่วนตัว seafood izakaya</div>
+          <div class="activity-tags"><span class="tag tag-food">⭐ Tabelog</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stay-card">
+      <div class="stay-icon">🌊</div>
+      <div class="stay-info">
+        <h3>ที่พัก 2 คืน: La Vista Hakodate Bay</h3>
+        <p>โรงแรมระดับ 4 ดาว ริมอ่าวฮาโกดาเตะ · ออนเซ็นบนดาดฟ้าวิวเมือง · อาหารเช้า buffet ซีฟู้ด · ใกล้ตลาดเช้าและ Kanemori<br>
+        <a href="https://maps.google.com/?q=La+Vista+Hakodate+Bay" target="_blank">📍 ดูบนแผนที่</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 9-10: LAKE TOYA + NISEKO -->
+  <div id="day9" class="day-group">
+    <div class="day-header">
+      <div class="day-num" style="background:var(--warm)">9</div>
+      <div class="day-info">
+        <h2>13 ก.ค. — Lake Toya + เก็บเชอรี่ Sobetsu</h2>
+        <div class="day-sub">ฮาโกดาเตะ → Lake Toya ~2 ชั่วโมง</div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F4E8;color:#2D6A2D">🍒</div>
+          10:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Takashina+Tourist+Orchard+Sobetsu" target="_blank">Takashina Tourist Orchard, Sobetsu — เก็บเชอรี่</a></div>
+          <div class="activity-desc">ฟาร์มผลไม้ที่ Sobetsu Town ใกล้ Lake Toya เชอรี่เริ่มฤดูกาลพอดี ก.ค. กิน all-you-can-eat ไม่ต้องจอง เปิด 9.00</div>
+          <div class="activity-tags">
+            <span class="tag tag-kids">❤️ เก็บเชอรี่</span>
+            <span class="tag tag-park">🍒 ผลไม้สด</span>
+          </div>
+          <div class="parking-note">ที่จอดรถฟรีในฟาร์ม</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F0FF;color:#2040A0">🌋</div>
+          13:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Lake+Toya+Hokkaido" target="_blank">Lake Toya — วิวทะเลสาบ</a></div>
+          <div class="activity-desc">ทะเลสาบกลางปล่องภูเขาไฟ (Caldera) นั่งเรือชมวิว หรือเดินริมทะเลสาบ ชม Mount Usu และ Showa Shinzan ภูเขาไฟที่เกิดใหม่ปี 1943</div>
+          <div class="activity-tags"><span class="tag tag-park">🌋 ธรรมชาติ</span></div>
+          <div class="parking-note">ที่จอดรถริมทะเลสาบในเมือง Toyako Onsen</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF0E5;color:#A0541A">🎆</div>
+          20:45
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">Toyako Summer Fireworks</div>
+          <div class="activity-desc">Lake Toya มีดอกไม้ไฟทุกคืนตั้งแต่ เม.ย.-ต.ค. ช่วง 20.45-21.00 ดูได้จากริมทะเลสาบ ฟรี!</div>
+          <div class="activity-tags"><span class="tag tag-kids">❤️ เด็กชอบ</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-header" style="margin-top:1.5rem">
+      <div class="day-num" style="background:var(--warm)">10</div>
+      <div class="day-info">
+        <h2>14 ก.ค. — Niseko + Yoichi (วิสกี้ + เชอรี่)</h2>
+        <div class="day-sub">Lake Toya → Niseko → Yoichi → ซัปโปโร</div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF5DC;color:#8B6000">🥃</div>
+          10:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Nikka+Whisky+Yoichi+Distillery" target="_blank">Nikka Whisky Yoichi Distillery</a></div>
+          <div class="activity-desc">โรงกลั่นวิสกี้ประวัติศาสตร์ เข้าชมฟรี มีพิพิธภัณฑ์ ชิมวิสกี้ (เด็กดูได้ด้วย) ใกล้ Otaru ~30 นาที</div>
+          <div class="activity-tags">
+            <span class="tag tag-beer">🥃 วิสกี้</span>
+            <span class="tag tag-note">เข้าฟรี</span>
+          </div>
+          <div class="parking-note">มีที่จอดรถในพื้นที่ฟรี</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F4E8;color:#2D6A2D">🍒</div>
+          13:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Yamamoto+Orchard+Yoichi" target="_blank">Yamamoto Orchard, Yoichi — เก็บเชอรี่</a></div>
+          <div class="activity-desc">ฟาร์ม Yoichi ขึ้นชื่อ "เมืองผลไม้" มีเชอรี่กว่า 10 พันธุ์ กินไม่อั้น เปิด 9.00-17.00 ไม่ต้องจอง</div>
+          <div class="activity-tags"><span class="tag tag-kids">❤️ เชอรี่หลากพันธุ์</span></div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F0FF;color:#2040A0">🚗</div>
+          16:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">ขับรถกลับซัปโปโร</div>
+          <div class="activity-desc">Yoichi → ซัปโปโร ~1.5 ชั่วโมง check-in โรงแรม พักผ่อน</div>
+          <div class="activity-tags"><span class="tag tag-drive">🚗 1.5 ชั่วโมง</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 11-12: SAPPORO AGAIN + JOZANKEI -->
+  <div id="day11" class="day-group">
+    <div class="day-header">
+      <div class="day-num" style="background:var(--forest)">11</div>
+      <div class="day-info">
+        <h2>15 ก.ค. — ซัปโปโร + Jozankei Onsen</h2>
+        <div class="day-sub">ช้อปปิ้งของฝาก + ออนเซ็น</div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F0FF;color:#2040A0">🛍️</div>
+          10:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">ช้อปปิ้งซัปโปโร — Tanukikoji + ESTA</div>
+          <div class="activity-desc">ถนน Tanukikoji 7 สายยาว ช้อปของฝาก Royce Chocolate, Rokkatei Butter Sand, นมฮอกไกโด ห้างใหญ่ ESTA, Daimaru ใกล้ Station</div>
+          <div class="activity-tags"><span class="tag tag-food">🛍️ ของฝาก</span></div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF0E5;color:#A0541A">🍦</div>
+          12:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">มื้อกลางวัน — Nijo Market ซัปโปโร</div>
+          <div class="activity-desc">ตลาด Nijo ในเมือง ซีฟู้ดสดราคาดีกว่าตลาดท่องเที่ยว ข้าวหน้าซีฟู้ด kaisen-don อร่อยมาก</div>
+          <div class="activity-tags"><span class="tag tag-food">🦐 Local Market</span></div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#EEE8FF;color:#5A3FA0">♨️</div>
+          15:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Jozankei+Onsen+Hokkaido" target="_blank">Jozankei Onsen — วันพักผ่อน</a></div>
+          <div class="activity-desc">ออนเซ็นที่ใกล้ซัปโปโรที่สุด (~1 ชั่วโมง) บรรยากาศธรรมชาติสวย แนะนำ Day trip onsen หรือค้างคืน</div>
+          <div class="activity-tags"><span class="tag tag-hotel">♨️ ออนเซ็น</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-header" style="margin-top:1.5rem">
+      <div class="day-num" style="background:var(--forest)">12</div>
+      <div class="day-info">
+        <h2>16 ก.ค. — Lake Shikotsu + วันพักผ่อน</h2>
+        <div class="day-sub">ทะเลสาบ Shikotsu ห่างจากซัปโปโร 1 ชั่วโมง</div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F4E8;color:#2D6A2D">🚣</div>
+          09:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title"><a href="https://maps.google.com/?q=Lake+Shikotsu+Hokkaido" target="_blank">Lake Shikotsu — คายัค / เรือแคนู</a></div>
+          <div class="activity-desc">ทะเลสาบน้ำใสสะอาด (น้ำสีฟ้าเทอร์ควอยซ์) เช่าคายัคหรือเรือแคนู เด็กชอบมาก อากาศเย็นสบาย</div>
+          <div class="activity-tags">
+            <span class="tag tag-kids">❤️ กิจกรรมน้ำ</span>
+            <span class="tag tag-park">🏞️ ทะเลสาบ</span>
+          </div>
+          <div class="parking-note">ที่จอดรถฟรีใกล้ท่าเรือ Shikotsu Onsen</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF0E5;color:#A0541A">🦐</div>
+          13:00
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">อาหารกลางวัน + กลับซัปโปโร</div>
+          <div class="activity-desc">ทานข้าวใกล้ทะเลสาบ แล้วกลับซัปโปโรพักผ่อนก่อนวันสุดท้าย</div>
+          <div class="activity-tags"><span class="tag tag-drive">🚗 1 ชั่วโมง</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stay-card">
+      <div class="stay-icon">🏨</div>
+      <div class="stay-info">
+        <h3>ที่พัก 3 คืน (กลับมาซัปโปโร): Onsen Ryokan Yuen Sapporo</h3>
+        <p>เรียวกังสไตล์โมเดิร์น ออนเซ็นน้ำแร่ธรรมชาติ ใกล้ใจกลางเมือง สะดวกช้อปปิ้ง<br>
+        <a href="https://maps.google.com/?q=Onsen+Ryokan+Yuen+Sapporo" target="_blank">📍 ดูบนแผนที่</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 13-14: FREE + DEPART -->
+  <div id="day13" class="day-group">
+    <div class="day-header">
+      <div class="day-num" style="background:#888">13</div>
+      <div class="day-info">
+        <h2>17 ก.ค. — วันอิสระ / ซื้อของฝากเพิ่ม</h2>
+        <div class="day-sub">ใช้เวลาตามชอบ ก่อนเดินทางกลับ</div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F4E8;color:#2D6A2D">🎠</div>
+          ทั้งวัน
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">วันอิสระ + Pack กระเป๋า</div>
+          <div class="activity-desc">แวะ Sapporo Factory (ห้างในโรงเบียร์เก่า) ซื้อของฝากเพิ่ม ชิม Sapporo miso ramen ที่ Ganso Sapporo Ramen Yokocho หรือนั่งพักผ่อนในสวน Odori</div>
+          <div class="activity-tags"><span class="tag tag-food">🍜 Miso Ramen</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-header" style="margin-top:1.5rem">
+      <div class="day-num" style="background:#888">14</div>
+      <div class="day-info">
+        <h2>18 ก.ค. — เดินทางกลับ</h2>
+        <div class="day-sub">ซัปโปโร → New Chitose Airport → กรุงเทพฯ</div>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#FFF0E5;color:#A0541A">☕</div>
+          เช้า
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">Checkout + มื้อสุดท้ายซัปโปโร</div>
+          <div class="activity-desc">ทานมื้อเช้าที่โรงแรม เช็คเอาท์ ซื้อของฝากเพิ่มที่ซัปโปโร แล้วมุ่งหน้า New Chitose ~1 ชั่วโมง คืนรถเช่า</div>
+          <div class="activity-tags"><span class="tag tag-drive">🚗 1 ชั่วโมง</span></div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-time">
+          <div class="act-icon" style="background:#E8F0FF;color:#2040A0">✈️</div>
+          บ่าย/เย็น
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">New Chitose Airport — ช้อปปิ้งในสนามบิน</div>
+          <div class="activity-desc">สนามบิน CTS มีร้านค้าดีมาก ลอง Hokkaido Ramen Dojo, แวะ Doraemon Sky Park (เด็กชอบ) ซื้อของฝากสุดท้าย แล้วบินกลับกรุงเทพฯ</div>
+          <div class="activity-tags">
+            <span class="tag tag-kids">❤️ Doraemon Park</span>
+            <span class="tag tag-food">🛍️ ของฝาก</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- STAY SUMMARY -->
+  <div id="stay">
+    <div class="section-title">สรุปที่พักแนะนำ</div>
+    <div class="landmark-grid">
+      <div class="landmark-card" style="border-left-color:var(--lavender)">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=Onsen+Ryokan+Yuen+Sapporo" target="_blank">Onsen Ryokan Yuen Sapporo</a></div>
+        <div class="landmark-area">ซัปโปโร · 2+3 คืน</div>
+        <div class="landmark-desc">เรียวกังโมเดิร์น ออนเซ็นน้ำแร่ธรรมชาติ ใกล้ Odori Park 10 นาที · Staff พูดภาษาอังกฤษได้ · ราคาดี</div>
+      </div>
+      <div class="landmark-card" style="border-left-color:var(--lavender)">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=La+Vista+Furano+Hills" target="_blank">La Vista Furano Hills</a></div>
+        <div class="landmark-area">ฟุราโนะ · 3 คืน</div>
+        <div class="landmark-desc">โรงแรม resort 3 นาทีจากสถานีฟุราโนะ ออนเซ็นส่วนตัว วิวภูเขา อาหารเช้า buffet ดีเยี่ยม</div>
+      </div>
+      <div class="landmark-card" style="border-left-color:var(--lavender)">
+        <div class="landmark-name"><a href="https://maps.google.com/?q=La+Vista+Hakodate+Bay" target="_blank">La Vista Hakodate Bay</a></div>
+        <div class="landmark-area">ฮาโกดาเตะ · 2 คืน</div>
+        <div class="landmark-desc">ออนเซ็นบนดาดฟ้าวิวอ่าว ใกล้ตลาดเช้า ริมอ่าว อาหารเช้า buffet ซีฟู้ด ระดับ 4 ดาว</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:#888;margin-top:0.5rem">⚠️ ก.ค. เป็น peak season ควรจองล่วงหน้าอย่างน้อย 3-4 เดือน โดยเฉพาะ La Vista ทั้งสองแห่ง</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FOOD TABELOG -->
+  <div id="food">
+    <div class="section-title">ร้านอาหารแนะนำจาก Tabelog</div>
+
+    <div class="tabelog-box">
+      <h3>โอตารุ — ซีฟู้ด & ซูชิ</h3>
+      <div class="tabelog-item">
+        <span class="tabelog-score">3.57</span>
+        <div><a href="https://tabelog.com/en/hokkaido/A0106/A010601/1044811/" target="_blank">Sankaku Tei (三角亭)</a> — Kaisen-don ข้าวหน้าซีฟู้ดในตลาด Sankaku Market ใกล้สถานี uni สด ไม่ใช้สาร</div>
+      </div>
+      <div class="tabelog-item">
+        <span class="tabelog-score">3.5+</span>
+        <div><a href="https://tabelog.com/en/hokkaido/A0106/A010601/1027887/" target="_blank">Kita no Donburiya Takinami Shokudo</a> — "Wagamama Don" เลือก topping ได้ เจ้าของร้านปลาโดยตรง เปิด 7 โมง</div>
+      </div>
+      <div class="tabelog-item">
+        <span class="tabelog-score">3.5+</span>
+        <div><a href="https://tabelog.com/en/hokkaido/A0106/A010601/rstLst/seafood/" target="_blank">Otaru Seafood Shinkai</a> — ซีฟู้ด bowl 15 ชนิด ใน vessel แก้วโอตารุ วิวคลอง</div>
+      </div>
+    </div>
+
+    <div class="tabelog-box">
+      <h3>ฮาโกดาเตะ — ซีฟู้ด & อาหารทะเล</h3>
+      <div class="tabelog-item">
+        <span class="tabelog-score">3.7+</span>
+        <div><a href="https://tabelog.com/en/hokkaido/A0105/A010501/rstLst/seafood/" target="_blank">Hakodate Dining Miyabiya</a> — 2 นาทีจากสถานี ข้าง Morning Market มื้อกลางวัน seafood set ดี</div>
+      </div>
+      <div class="tabelog-item">
+        <span class="tabelog-score">3.6+</span>
+        <div>Uomasa Goryokaku (魚政 五稜郭本店) — ห้องส่วนตัว izakaya ซีฟู้ดสด Hakodate ข้าง Goryokaku Park</div>
+      </div>
+      <div class="tabelog-item">
+        <span class="tabelog-score">3.5+</span>
+        <div>ซีฟู้ดสดใน Hakodate Morning Market — เลือกร้านที่ไม่ให้ราคา tourist trap แนะนำดูโดยไม่เดินเข้าร้านแรกที่เห็น</div>
+      </div>
+    </div>
+
+    <div class="tabelog-box">
+      <h3>ซัปโปโร — ซีฟู้ด & อาหารท้องถิ่น</h3>
+      <div class="tabelog-item">
+        <span class="tabelog-score">3.6+</span>
+        <div>Sapporo Nijo Market — ตลาด local kaisen-don ราคาดีกว่าท่องเที่ยว ใจกลางเมือง</div>
+      </div>
+      <div class="tabelog-item">
+        <span class="tabelog-score">3.5+</span>
+        <div>Ganso Sapporo Ramen Yokocho — ซอยราเม็ง miso ramen ต้นตำรับซัปโปโร รวม 17 ร้านในซอยเดียว</div>
+      </div>
+      <div class="tabelog-item">
+        <span class="tabelog-score">3.5+</span>
+        <div>Susukino Izakaya — ย่าน Susukino มีร้าน seafood izakaya หลายร้าน ซีฟู้ดสด live scallop/urchin</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TIPS -->
+  <div id="tips">
+    <div class="section-title">เคล็ดลับและข้อแนะนำ</div>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-title">🚗 การเช่ารถ</div>
+        <div class="tip-desc">จองล่วงหน้า 3-4 เดือน เพราะ ก.ค. เป็น peak season รถเช่าตึงมาก แนะนำ Toyota Rent a Car หรือ Times Car ที่สนามบิน CTS · ต้องมีใบขับขี่สากล (IDP)</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">🍒 การเก็บเชอรี่</div>
+        <div class="tip-desc">ต้น ก.ค. = peak season เชอรี่ฮอกไกโด ฟาร์มที่ Jozankei, Sobetsu, Yoichi เปิดช่วงนี้พอดี บางฟาร์มไม่ต้องจอง ลองโทรเช็คก่อนไป</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">🌸 ลาเวนเดอร์ Furano</div>
+        <div class="tip-desc">ช่วงบานสุด: กลาง ก.ค. - ต้น ส.ค. แต่ต้น ก.ค. ก็เริ่มบานแล้ว Farm Tomita เป็นจุดยอดนิยม มาเช้าก่อน 10.00 จะสวยและไม่แน่น</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">♨️ ออนเซ็น</div>
+        <div class="tip-desc">ทั้ง La Vista Furano Hills และ La Vista Hakodate Bay มีออนเซ็นในตัว ไม่ต้องออกไปหาที่อื่น เด็ก 8 ขวบเข้าออนเซ็นได้ (ส่วนใหญ่ขึ้นกับแต่ละแห่ง)</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">🍺 Sapporo Beer Museum</div>
+        <div class="tip-desc">จอง Premium Tour ล่วงหน้าออนไลน์! วันหยุดเต็มไวมาก สามารถจองล่วงหน้าบนเว็บ sapporobeer.jp เปิด 11.00 น. ทุกวัน</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">🌡️ สภาพอากาศ</div>
+        <div class="tip-desc">ก.ค. ที่ฮอกไกโด อุณหภูมิ 20-27°C เย็นสบาย ไม่ร้อนอบอ้าวเหมือนส่วนอื่นของญี่ปุ่น แต่ต้องพก jacket บางๆ สำหรับตอนเย็น</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">💴 เงิน</div>
+        <div class="tip-desc">ฮอกไกโดนอกเมืองยังนิยมเงินสด เตรียม yen ไว้พอสมควร ATM ที่ 7-Eleven และ Japan Post Bank ใช้บัตรต่างชาติได้</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">🗓️ จอง Workshop ล่วงหน้า</div>
+        <div class="tip-desc">Shiroi Koibito Park (cookie making), Furano Cheese Factory (butter/ice cream making), Sapporo Beer Museum Premium Tour — ทั้งหมดควรจองล่วงหน้า</div>
+      </div>
+    </div>
+  </div>
 
 </div>
+
+<footer>
+  แผนการเดินทางฮอกไกโด · 5-18 กรกฎาคม 2026 · สร้างโดย Claude AI<br>
+  <small>ข้อมูลราคาและเวลาเปิด-ปิดอาจเปลี่ยนแปลง แนะนำยืนยันก่อนออกเดินทาง</small>
+</footer>
 
 </body>
 </html>
